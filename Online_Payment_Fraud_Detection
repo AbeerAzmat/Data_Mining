@@ -1,0 +1,27 @@
+
+import numpy as np #importing libraries and dataset
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+%matplotlib inline
+data = pd.read_csv('new_data.csv') #this dataset includes the features like old transctions, payments, name of destination and balance etc
+data.head()
+data.info() #for printing information
+data.describe() # lets see mean, count, minimum and maximum values 
+
+
+#DATA VISUALIZATION
+obj = (data.dtypes == 'object')
+object_cols = list(obj[obj].index)
+print("Categorical variables:", len(object_cols))
+
+int_ = (data.dtypes == 'int')
+num_cols = list(int_[int_].index)
+print("Integer variables:", len(num_cols))
+
+fl = (data.dtypes == 'float')
+fl_cols = list(fl[fl].index)
+print("Float variables:", len(fl_cols))
+sns.countplot(x='type', data=data) #lets see the count plot of the payment type column using seaborn library
+sns.barplot(x='type', y='amount', data=data) #analizing type and amount column side by side
+data['isFraud'].value_counts()
